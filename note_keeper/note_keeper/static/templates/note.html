@@ -14,12 +14,9 @@
 <br />
 <br />
 {% for note in notes.all %}
-    <aside class="note-wrap note-yellow note-blue">
-        <li>{{ note.text }}</li>
+    <aside class="note-wrap">
+        <aside class="note-yellow">
+            <li>{{ note.text }}</li>
+        </aside>
     </aside>
 {% endfor %}
-
-<form method="POST" action="">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add note">
-</form>
