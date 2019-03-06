@@ -18,11 +18,12 @@ from django.urls import path
 
 from django.conf.urls import include, url
 
-from notes.views import home
+from notes.views import note_list, add_note, note_details
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    url(r'^$', home, name='home'),
+    url(r'^$', note_list),
+    path('note/<int:note_id>/', note_details),
+    url(r'^add/', add_note),
     path('admin/', admin.site.urls),
-
 ]
