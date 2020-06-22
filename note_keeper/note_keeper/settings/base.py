@@ -24,7 +24,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def convert_str_to_bool_if_bool_str(env_var):
-    # ToDo(Sunit/Abhishek): Find a better way to parse this :|
     truthy_list = [True, 'true', 'True', 1, '1']
     falsy_list = [False, 'false', 'False', 0, '0']
 
@@ -71,7 +70,9 @@ INSTALLED_APPS = [
 
 PROJECT_APPS = [
     'notes',
-    'note_utils'
+    'note_utils',
+    'crispy_forms',
+    'markdownx'
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -92,7 +93,7 @@ ROOT_URLCONF = 'note_keeper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(BASE_DIR), 'note_keeper', "static",  "templates")],
+        'DIRS': [os.path.join(os.path.dirname(BASE_DIR), "note_keeper",  "static")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,6 +159,15 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-TEMPLATE_DIRS = [os.path.join(os.path.dirname(BASE_DIR), 'note_keeper', "static",  "templates")]
-print(TEMPLATE_DIRS)
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'pymdownx.inlinehilite',
+    'pymdownx.snippets',
+    'pymdownx.superfences',
+    'pymdownx.emoji'
+]

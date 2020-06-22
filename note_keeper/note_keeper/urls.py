@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 from django.conf.urls import include, url
 
-from notes.views import home
+from notes import views
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    url(r'^$', home, name='home'),
+    url(r'^markdownx/', include('markdownx.urls')),  # Markdown urls
     path('admin/', admin.site.urls),
-
+    path('register/', views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path("", include("notes.urls")),
 ]
