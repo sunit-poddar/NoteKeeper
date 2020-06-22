@@ -24,7 +24,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def convert_str_to_bool_if_bool_str(env_var):
-    # ToDo(Sunit/Abhishek): Find a better way to parse this :|
     truthy_list = [True, 'true', 'True', 1, '1']
     falsy_list = [False, 'false', 'False', 0, '0']
 
@@ -71,7 +70,9 @@ INSTALLED_APPS = [
 
 PROJECT_APPS = [
     'notes',
-    'note_utils'
+    'note_utils',
+    'crispy_forms',
+    'ckeditor',
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -157,3 +158,23 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Styles', 'Format','Bold', 'Italic', 'Underline', 'Undo', 'Redo'],
+            ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['Table', 'HorizontalRule'],
+            ['Smiley'],
+            ['RemoveFormat']
+        ],
+        'width': 'auto'
+    }
+}
