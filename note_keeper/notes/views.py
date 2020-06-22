@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import Http404
 
+from django.db import transaction
 from .forms import NoteForm
 from .models import Note
 from .forms import UserRegisterForm
@@ -21,15 +23,18 @@ def note_list(request, *args, **kwargs):
     return render(request, 'note_home.html', context)
 
 
-def note_details(request, note_id):
-    note = Note.objects.get(id=note_id)
-    form = NoteForm(request.POST or None)
-
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Note modified!")
+def note_details(request, note_slug):
+    note = Note.objects.get(slug=note_slug)
 
     context = {'note': note}
+
+    if request.user == note.author:
+        context['read_only'] = False
+    else:
+        if not note.is_public:
+            raise Http404("Page not found")
+
+        context['read_only'] = True
 
     return render(request, 'note_details.html', context)
 
@@ -74,6 +79,18 @@ def delete(request, note_id):
     if request.user == obj.author:
         Note.objects.filter(id=note_id).delete()
     return redirect('index')
+
+
+@login_required
+@transaction.atomic
+def publish(request, note_id):
+    note = Note.objects.get(id=note_id)
+
+    if request.user == note.author:
+        published_url = note.publish()
+        return redirect("/note/{}".format(published_url))
+
+    return redirect("index")
 
 
 def register(request):

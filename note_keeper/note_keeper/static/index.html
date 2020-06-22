@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
-    <title>Notes Keeper</title>
+    <title>Notebook</title>
 {% endblock %}
 
 {% block content %}
@@ -12,8 +12,9 @@
         {% for note in user.notes.all %}
             <h4 class="mt-4">{{ note.title }}</h4>
             <a class="btn btn-outline-info btn-sm" href="/note/{{ note.id }}/">View</a>
-            <a class="btn btn-outline-success btn-sm" href="/edit/{{ note.id }}/">Edit</a>
+            <a class="btn btn-outline-success btn-sm" href="/edit/{{ note.slug }}/">Edit</a>
             <a class="btn btn-outline-danger btn-sm" href="/delete/{{ note.id }}/">Delete</a>
+            <a class="btn btn-outline-info btn-sm" href="/publish/{{ note.id }}">Publish</a>
             <br>
             <small class="text-muted mt-0">Last Modified: {{ note.updated_at }}</small>
         {% endfor %}

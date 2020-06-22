@@ -72,7 +72,7 @@ PROJECT_APPS = [
     'notes',
     'note_utils',
     'crispy_forms',
-    'ckeditor',
+    'markdownx'
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -164,17 +164,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Styles', 'Format','Bold', 'Italic', 'Underline', 'Undo', 'Redo'],
-            ['NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['Table', 'HorizontalRule'],
-            ['Smiley'],
-            ['RemoveFormat']
-        ],
-        'width': 'auto'
-    }
-}
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'pymdownx.inlinehilite',
+    'pymdownx.snippets',
+    'pymdownx.superfences',
+    'pymdownx.emoji'
+]

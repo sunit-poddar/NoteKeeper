@@ -10,7 +10,8 @@ requests = "==2.21.0"
 django-jet = "==1.0.8"
 python-slugify = "*"
 django-crispy-forms = "==1.7.2"
-django-ckeditor = "==5.6.1"
+django-markdownx = "==3.0.1"
+pymdown-extensions = "==7.1"
 
 [dev-packages]
 

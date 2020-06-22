@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load markdown_tags %}
+
 {% block head %}
 <title>View Note</title>
 {% endblock %}
@@ -12,6 +14,6 @@
 <a class="btn btn-outline-danger btn-sm" href="/delete/{{ note.id }}/">Delete</a>
 {% endif %}
 <div class="content-section mt-3">
-    {{ note.text | safe }}
+    {{ note.text | safe | markdown}}
 </div>
 {% endblock %}

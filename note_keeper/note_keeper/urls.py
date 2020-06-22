@@ -22,6 +22,7 @@ from notes import views
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^markdownx/', include('markdownx.urls')),  # Markdown urls
     path('admin/', admin.site.urls),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
