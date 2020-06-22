@@ -12,6 +12,8 @@
 {% if not read_only %}
 <a class="btn btn-outline-success btn-sm" href="/edit/{{ note.id }}/">Edit</a>
 <a class="btn btn-outline-danger btn-sm" href="/delete/{{ note.id }}/">Delete</a>
+<a class="btn btn-outline-info btn-sm" href="/publish/{{ note.id }}">Publish</a>
+
 {% endif %}
 <div class="content-section mt-3">
     {{ note.text | safe | markdown}}

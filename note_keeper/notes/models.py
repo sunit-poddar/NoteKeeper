@@ -2,7 +2,7 @@
 from django.db import models
 from slugify import slugify
 from django.contrib.auth.models import User
-import uuid
+import secrets
 
 # third party imports
 from markdownx.models import MarkdownxField
@@ -22,11 +22,15 @@ class Note(RowInformation):
         verbose_name_plural = "Notes"
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        if self.pk is None:
+            self.slug = "{}-{}".format(slugify(self.title), secrets.token_hex(4))
+
         super(Note, self).save(*args, **kwargs)
 
     def publish(self):
-        self.slug = slugify(self.title)
+        if not self.slug:
+            self.slug = "{}-{}".format(slugify(self.title), secrets.token_hex(4))
+
         self.is_public = True
         self.save()
 
