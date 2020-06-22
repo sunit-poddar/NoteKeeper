@@ -1,0 +1,22 @@
+{% load static %}
+
+<link href="{% static 'css/note.css' %}" rel="stylesheet" type="text/css">
+
+<style>
+    body {
+        <br />
+        background: rgba(222,222,222,1);<br />
+        margin: 20px;<br />
+        }
+    <br />
+</style>
+
+<br />
+<br />
+{% for note in notes.all %}
+    <aside class="note-wrap">
+        <aside class="note-yellow">
+            <li>{{ note.text }}</li>
+        </aside>
+    </aside>
+{% endfor %}

@@ -23,7 +23,6 @@ def note_list(request, *args, **kwargs):
 
 def note_details(request, note_id):
     note = Note.objects.get(id=note_id)
-
     form = NoteForm(request.POST or None)
 
     if form.is_valid():
